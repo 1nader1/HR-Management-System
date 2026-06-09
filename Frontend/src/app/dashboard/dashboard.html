@@ -1,0 +1,183 @@
+<div class="glass-dashboard-wrapper">
+
+  <header class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <h1>{{ 'DASHBOARD.PAGE_TITLE' | translate }}</h1>
+    
+    <button class="glass-btn-report" (click)="toggleReportModal()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <line x1="16" y1="13" x2="8" y2="13"></line>
+        <line x1="16" y1="17" x2="8" y2="17"></line>
+        <polyline points="10 9 9 9 8 9"></polyline>
+      </svg>
+      <span class="btn-text">{{ 'DASHBOARD.EXTRACT_REPORT' | translate }}</span>
+    </button>
+  </header>
+
+  <div class="pill-container">
+    <div class="glass-visits-pill">
+      <span class="pill-title">{{ 'DASHBOARD.VISITS' | translate | uppercase }}:</span>
+      <span class="pill-value">&nbsp;{{ stats.siteVisits }}</span>
+      
+      <div class="icon-overlap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-stats-grid">
+
+    <div class="glass-stat-card">
+      <p class="stat-title">{{ 'DASHBOARD.TOTAL_EMPLOYEES' | translate | uppercase }}</p>
+      <h3 class="stat-value">{{ stats.totalEmployees }}</h3>
+      <div class="icon-overlap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+    </div>
+    
+    <div class="glass-stat-card">
+      <p class="stat-title">{{ 'DASHBOARD.DEPARTMENTS' | translate | uppercase }}</p>
+      <h3 class="stat-value">{{ stats.departmentsCount }}</h3>
+      <div class="icon-overlap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <rect x="8" y="2" width="8" height="6" rx="1"></rect>
+          <path d="M12 8v4"></path>
+          <path d="M6 12h12"></path>
+          <path d="M6 12v2"></path>
+          <path d="M18 12v2"></path>
+          <rect x="2" y="14" width="8" height="6" rx="1"></rect>
+          <rect x="14" y="14" width="8" height="6" rx="1"></rect>
+        </svg>
+      </div>
+    </div>
+
+    <div class="glass-stat-card">
+      <p class="stat-title">{{ 'DASHBOARD.PROFITS' | translate | uppercase }}</p>
+      <h3 class="stat-value">{{ stats.totalProfits }}</h3>
+      <div class="icon-overlap">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"></circle>
+          <path d="M12 8v8"></path>
+          <path d="M9.5 9.5c.8-.8 2.5-1.5 4-1 .9.3 1.5 1 1.5 2 0 2-5 2-5 4 0 1 .6 1.7 1.5 2 1.5.5 3.2-.2 4-1"></path>
+        </svg>
+      </div>
+    </div>
+
+  </div>
+  
+  @if (isLoaded) {
+    <div class="glass-charts-grid">
+
+      <div class="glass-chart-card">
+        <h3 class="chart-title">{{ 'DASHBOARD.SALARY_DISTRIBUTION' | translate | uppercase }}</h3>
+        <div class="chart-wrapper">
+          <apx-chart 
+            [series]="barChartOptions.series"
+            [chart]="barChartOptions.chart"
+            [xaxis]="barChartOptions.xaxis"
+            [colors]="barChartOptions.colors"
+            [plotOptions]="barChartOptions.plotOptions"
+            [dataLabels]="barChartOptions.dataLabels"
+            [tooltip]="barChartOptions.tooltip"
+            [grid]="barChartOptions.grid">
+          </apx-chart>
+        </div>
+      </div>
+
+      <div class="glass-chart-card">
+        <h3 class="chart-title">{{ 'DASHBOARD.DEPT_CHART' | translate | uppercase }}</h3>
+        <div class="chart-wrapper">
+          <apx-chart 
+            [series]="pieChartOptions.series"
+            [chart]="pieChartOptions.chart"
+            [labels]="pieChartOptions.labels"
+            [colors]="pieChartOptions.colors"
+            [responsive]="pieChartOptions.responsive"
+            [stroke]="pieChartOptions.stroke">
+          </apx-chart>
+        </div>
+      </div>
+
+    </div>
+  } @else {
+    <div class="glass-loading-state">
+      <div class="spinner"></div>
+      <p>{{ 'DASHBOARD.SYNCING_DATA' | translate }}</p>
+    </div>
+  }
+
+  @if (showReportModal) {
+  <div class="glass-modal-overlay">
+    <div class="glass-modal-card">
+      
+      <div class="modal-header">
+        <h3>{{ 'DASHBOARD.REPORT_MODAL.TITLE' | translate }}</h3>
+        <p>{{ 'DASHBOARD.REPORT_MODAL.SUBTITLE' | translate }}</p>
+      </div>
+      
+      <div class="modal-body">
+        <div class="glass-form-group">
+          <label>{{ 'DASHBOARD.REPORT_MODAL.REPORT_TYPE' | translate }}</label>
+          <div class="glass-select-wrapper">
+            <select [(ngModel)]="reportType" class="glass-input-premium">
+              <option value="salary">{{ 'DASHBOARD.REPORT_MODAL.TYPE_SALARY' | translate }}</option>
+              <option value="department">{{ 'DASHBOARD.REPORT_MODAL.TYPE_DEPARTMENT' | translate }}</option>
+            </select>
+          </div>
+        </div>
+
+        @if (reportType === 'salary') {
+          <div class="salary-settings-grid">
+            <div class="glass-form-group">
+              <label>{{ 'DASHBOARD.REPORT_MODAL.CONDITION' | translate }}</label>
+              <div class="glass-select-wrapper">
+                <select [(ngModel)]="salaryCondition" class="glass-input-premium">
+                  <option value="greater">{{ 'DASHBOARD.REPORT_MODAL.COND_GREATER' | translate }}</option>
+                  <option value="less">{{ 'DASHBOARD.REPORT_MODAL.COND_LESS' | translate }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="glass-form-group">
+              <label>{{ 'DASHBOARD.REPORT_MODAL.AMOUNT' | translate }}</label>
+              <input type="number" [(ngModel)]="salaryAmount" class="glass-input-premium" placeholder="500">
+            </div>
+          </div>
+        }
+
+        @if (reportType === 'department') {
+          <div class="glass-form-group animate-fade">
+            <label>{{ 'DASHBOARD.REPORT_MODAL.SELECT_DEPT' | translate }}</label>
+            <div class="glass-select-wrapper">
+              <select [(ngModel)]="selectedDept" class="glass-input-premium">
+                <option value="" disabled selected>{{ 'DASHBOARD.REPORT_MODAL.DEPT_LIST' | translate }}</option>
+                @for (dept of departments; track dept) {
+                  <option [value]="dept">{{ dept }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        }
+      </div>
+
+      <div class="modal-footer">
+        <button class="glass-btn-premium primary" (click)="generateReport()">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          {{ 'DASHBOARD.REPORT_MODAL.DOWNLOAD_EXCEL' | translate }}
+        </button>
+        <button class="glass-btn-premium secondary" (click)="toggleReportModal()">{{ 'DASHBOARD.REPORT_MODAL.CANCEL' | translate }}</button>
+      </div>
+
+    </div>
+  </div>
+  }
+  
+</div>

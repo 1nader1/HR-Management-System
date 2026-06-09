@@ -1,0 +1,38 @@
+<div class="glass-page-wrapper">
+  <div class="glass-container">
+    
+    <div class="glass-left-panel">
+    <div class="inner-image-wrapper"></div>      
+      <div class="text-content">
+        <h1>{{ 'LOGIN.HERO_TITLE' | translate }}</h1>
+        <p>{{ 'LOGIN.HERO_DESC' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="glass-right-panel">
+      <form class="glass-form" (ngSubmit)="onLogin()">
+        
+        <h2 class="form-title">{{ 'LOGIN.TITLE' | translate }}</h2>
+
+        <div class="form-group">
+          <label>{{ 'LOGIN.EMAIL_LABEL' | translate }}</label>
+          <input type="email" name="email" [(ngModel)]="loginObj.email" required class="glass-input" [placeholder]="'LOGIN.EMAIL_PLACEHOLDER' | translate">
+        </div>
+        
+        <div class="form-group">
+          <label>{{ 'LOGIN.PASSWORD_LABEL' | translate }}</label>
+          <input type="password" name="password" [(ngModel)]="loginObj.password" required class="glass-input" [placeholder]="'LOGIN.PASSWORD_PLACEHOLDER' | translate">
+        </div>
+
+        <button type="submit" class="glass-btn">{{ 'LOGIN.LOGIN_BTN' | translate }}</button>
+        
+        <p class="switch-link-glass">
+          {{ 'LOGIN.NO_ACCOUNT_TEXT' | translate }} 
+          <a routerLink="/register" class="glass-link">{{ 'LOGIN.REGISTER_LINK' | translate }}</a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</div>

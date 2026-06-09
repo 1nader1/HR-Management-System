@@ -1,0 +1,44 @@
+<div class="glass-page-wrapper">
+  <div class="glass-container">
+    
+    <div class="glass-left-panel">
+      <div class="inner-image-wrapper"></div>
+      
+      <div class="text-content">
+        <h1>{{ 'LOGIN.HERO_TITLE' | translate }}</h1>
+        <p>{{ 'LOGIN.HERO_DESC' | translate }}</p>
+      </div>
+    </div>
+
+    <div class="glass-right-panel">
+      <form class="glass-form" (ngSubmit)="onRegister()">
+        
+        <h2 class="form-title">{{ 'REGISTER.TITLE' | translate }}</h2>
+
+        <div class="form-group">
+          <label>{{ 'REGISTER.NAME_LABEL' | translate }}</label>
+          <input type="text" name="name" [(ngModel)]="registerObj.name" required class="glass-input" [placeholder]="'REGISTER.NAME_PLACEHOLDER' | translate">
+        </div>
+
+        <div class="form-group">
+          <label>{{ 'REGISTER.EMAIL_LABEL' | translate }}</label>
+          <input type="email" name="email" [(ngModel)]="registerObj.email" required class="glass-input" [placeholder]="'REGISTER.EMAIL_PLACEHOLDER' | translate">
+        </div>
+        
+        <div class="form-group">
+          <label>{{ 'REGISTER.PASSWORD_LABEL' | translate }}</label>
+          <input type="password" name="password" [(ngModel)]="registerObj.password" required class="glass-input" [placeholder]="'REGISTER.PASSWORD_PLACEHOLDER' | translate">
+        </div>
+
+        <button type="submit" class="glass-btn">{{ 'REGISTER.REGISTER_BTN' | translate }}</button>
+        
+        <p class="switch-link-glass">
+          {{ 'REGISTER.HAS_ACCOUNT_TEXT' | translate }} 
+          <a routerLink="/login" class="glass-link">{{ 'REGISTER.LOGIN_LINK' | translate }}</a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,129 @@
+<div class="glass-dashboard-wrapper">
+  
+  <header class="page-header">
+    <h1>{{ 'EMPLOYEES.EMPLOYEE_LIST' | translate }}</h1>
+  </header>
+
+  @if (!showForm) {
+    <div class="glass-top-bar">
+      @if (userRole === 'Manager') {
+        <button class="glass-btn-add" (click)="openAddForm()">
+          <span class="plus-icon">+</span>
+          <span class="btn-text">{{ 'EMPLOYEES.ADD_NEW_BTN' | translate }}</span>
+        </button>
+      }
+
+      <div class="rows-selector">
+        <select class="glass-select-small" [(ngModel)]="itemsPerPage">
+          <option [value]="6">6</option>
+          <option [value]="10">10</option>
+          <option [value]="20">20</option>
+          <option [value]="1000">الكل</option>
+        </select>
+      </div>
+    </div>
+  }
+
+  @if (showForm) {
+    <section class="form-section">
+      <div class="glass-card">
+        <h3>{{ isEditing ? ('EMPLOYEES.EDIT_TITLE' | translate) : ('EMPLOYEES.ADD_TITLE' | translate) }}</h3>
+        
+        <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm)">
+          <div class="form-group-row">
+            <input type="text" name="name" [(ngModel)]="currentEmployee.name" 
+                   #name="ngModel" [placeholder]="'EMPLOYEES.NAME_PLACEHOLDER' | translate" required class="glass-input">
+            
+            <div class="input-wrapper" style="flex: 1;">
+              <input type="email" name="email" [(ngModel)]="currentEmployee.email" 
+                     #email="ngModel" [placeholder]="'EMPLOYEES.EMAIL_PLACEHOLDER' | translate" required email class="glass-input">
+              
+              @if (emailError) {
+                <small class="error-text">{{ 'EMPLOYEES.EMAIL_EXISTS_ERR' | translate }}</small>
+              }
+              @if (email.invalid && email.touched) {
+                <small class="error-text">يرجى إدخال بريد إلكتروني صحيح</small>
+              }
+            </div>
+          </div>
+          
+          <div class="form-group-row">
+            <select name="department" [(ngModel)]="currentEmployee.department" 
+                    required (change)="onDepartmentChange()" class="glass-input">
+              <option value="" disabled selected>{{ 'EMPLOYEES.DEPT_PLACEHOLDER' | translate }}</option>
+              @for (dept of departments; track dept) {
+                <option [value]="dept">{{ dept }}</option>
+              }
+            </select>
+
+            <select name="position" [(ngModel)]="currentEmployee.position" 
+                    required [disabled]="!currentEmployee.department" class="glass-input">
+              <option value="" disabled selected>{{ 'EMPLOYEES.POSITION_PLACEHOLDER' | translate }}</option>
+              @for (pos of filteredPositions; track pos) {
+                <option [value]="pos">{{ pos }}</option>
+              }
+            </select>
+          </div>
+
+          <div class="form-group-row">
+            <input type="number" name="salary" [(ngModel)]="currentEmployee.salary" 
+                   #salary="ngModel" [placeholder]="'EMPLOYEES.SALARY_PLACEHOLDER' | translate" 
+                   required min="1" class="glass-input" style="width: 50%;">
+          </div>
+          
+          <div class="form-actions">
+            <button type="submit" class="glass-btn primary-glass" [disabled]="empForm.invalid">
+              {{ isEditing ? ('EMPLOYEES.UPDATE_BTN' | translate) : ('EMPLOYEES.SAVE_BTN' | translate) }}
+            </button>
+            <button type="button" class="glass-btn secondary-glass" (click)="resetForm()">
+              {{ 'EMPLOYEES.CANCEL_BTN' | translate }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+  }
+
+  <section class="table-section" [hidden]="showForm">
+    <div class="glass-table-wrapper">
+      <table class="glass-table">
+        <thead>
+          <tr>
+            <th>{{ 'EMPLOYEES.TABLE_NAME' | translate }}</th>
+            <th>{{ 'EMPLOYEES.TABLE_EMAIL' | translate }}</th>
+            <th>{{ 'EMPLOYEES.TABLE_DEPARTMENT' | translate }}</th>
+            <th>{{ 'EMPLOYEES.TABLE_POSITION' | translate }}</th>
+            <th>{{ 'EMPLOYEES.TABLE_SALARY' | translate }}</th>
+            @if (userRole === 'Manager') {
+              <th>{{ 'EMPLOYEES.TABLE_ACTIONS' | translate }}</th>
+            }
+          </tr>
+        </thead>
+        <tbody>
+          @for (emp of employees | slice:0:itemsPerPage; track emp.id) {
+            <tr>
+              <td>{{ emp.name }}</td>
+              <td>{{ emp.email }}</td>
+              <td>{{ emp.department }}</td>
+              <td>{{ emp.position }}</td>
+              <td>{{ emp.salary | currency:'JD ' }}</td>
+              @if (userRole === 'Manager') {
+                <td>
+                  <div class="action-buttons">
+                    <button class="glass-action-btn edit-btn" (click)="editEmployee(emp)">✏️</button>
+                    <button class="glass-action-btn delete-btn" (click)="deleteEmployee(emp.id)">🗑️</button>
+                  </div>
+                </td>
+              }
+            </tr>
+          } @empty {
+            <tr>
+              <td [attr.colspan]="userRole === 'Manager' ? 6 : 5" class="empty-msg">{{ 'EMPLOYEES.EMPTY_MSG' | translate }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+</div>

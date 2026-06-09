@@ -1,0 +1,453 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400&display=swap');
+
+:host {
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --text-light: #ffffff;
+  --font-main: 'Outfit', sans-serif;
+}
+
+.glass-dashboard-wrapper {
+  padding: 10px 40px 50px;
+  font-family: var(--font-main);
+  color: var(--text-light);
+  min-height: calc(100vh - 100px);
+}
+
+.page-header h1 {
+  text-align: center;
+  font-weight: 300;
+  letter-spacing: 3px;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.pill-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.glass-visits-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 40px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.pill-title {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 1rem;
+}
+
+.pill-value {
+  font-weight: 400;
+  font-size: 1.2rem;
+}
+
+.glass-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 50px;
+}
+
+.glass-stat-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 30px 20px 40px; 
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.glass-stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-title {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-weight: 200;
+  font-size: 5rem; 
+  line-height: 1;
+  margin: 0;
+}
+
+.icon-overlap {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 50%);
+  background: transparent; 
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-overlap svg {
+  width: 28px;
+  height: 28px;
+  color: var(--text-light);
+  background: rgba(40, 40, 40, 0); 
+  border-radius: 80%;
+  padding: 5px;
+}
+
+.glass-charts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+.glass-chart-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 30px 20px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.chart-title {
+  font-weight: 300;
+  letter-spacing: 2px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+
+.chart-wrapper {
+  min-height: 300px;
+}
+
+::ng-deep .apexcharts-text {
+  fill: #ffffff !important;
+  font-family: 'Outfit', sans-serif !important;
+  font-weight: 300 !important;
+}
+
+::ng-deep .apexcharts-legend-text {
+  color: #ffffff !important;
+}
+
+::ng-deep .apexcharts-tooltip {
+  background: rgba(20, 20, 20, 0.8) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5) !important;
+  color: #fff !important;
+}
+
+::ng-deep .apexcharts-tooltip-title {
+  background: rgba(0, 0, 0, 0.5) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+::ng-deep .apexcharts-gridline {
+  stroke: rgba(255, 255, 255, 0.1) !important;
+}
+
+@media (max-width: 1000px) {
+  .glass-stats-grid { grid-template-columns: 1fr; gap: 50px; }
+  .glass-charts-grid { grid-template-columns: 1fr; }
+  .stat-value { font-size: 4rem; }
+}
+
+.glass-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+.spinner {
+  width: 50px; height: 50px;
+  border: 3px solid rgba(255,255,255,0.1);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+
+.glass-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4); 
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.glass-modal-card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 25px;
+  padding: 40px;
+  width: 90%;
+  max-width: 450px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  transform: translateY(20px);
+  animation: slideUp 0.3s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.glass-modal-card h3 {
+  margin-top: 0;
+  margin-bottom: 25px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.glass-modal-card label {
+  display: block;
+  text-align: start;
+  margin-bottom: 5px;
+  font-weight: 200;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+.glass-btn-report {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid var(--glass-border);
+  border-radius: 30px;
+  padding: 10px 25px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-family: inherit;
+}
+
+.glass-btn-report:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+}
+
+.glass-btn-report .btn-text {
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.glass-input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  border-radius: 15px;
+  padding: 12px 15px;
+  color: white;
+  font-size: 1rem;
+  font-family: inherit;
+  outline: none;
+  transition: 0.3s;
+  width: 100%;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+}
+
+select.glass-input {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.glass-input option {
+  background-color: #2c2c2c;
+  color: white;
+  padding: 10px;
+}
+
+.glass-modal-overlay {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 2000;
+}
+
+.glass-modal-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 35px;
+  padding: 40px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+  color: white;
+  animation: modalIn 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.9) translateY(30px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header h3 {
+  font-weight: 300; letter-spacing: 2px; margin: 0 0 10px; text-align: center;
+}
+
+.modal-header p {
+  font-weight: 200; font-size: 0.85rem; opacity: 0.7; text-align: center; margin-bottom: 30px;
+}
+
+.glass-form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.glass-form-group label {
+  font-weight: 300; font-size: 0.8rem; letter-spacing: 1px; opacity: 0.8; padding-inline-start: 15px;
+}
+
+.glass-input-premium {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50px; /* شكل Pill */
+  padding: 14px 25px;
+  color: white;
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+  transition: all 0.3s;
+  box-sizing: border-box;
+}
+
+.glass-input-premium:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: white;
+  box-shadow: 0 0 15px rgba(255,255,255,0.1);
+}
+
+.salary-settings-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Custom Dropdown Arrow Wrapper */
+.glass-select-wrapper {
+  position: relative;
+}
+
+.glass-select-wrapper::after {
+  content: '▼';
+  font-size: 0.7rem;
+  position: absolute;
+  top: 50%;
+  inset-inline-end: 20px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+select.glass-input-premium {
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+}
+
+select.glass-input-premium option {
+  background: #1a1a1a;
+  color: white;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 15px;
+  margin-top: 35px;
+  justify-content: center;
+}
+
+.glass-btn-premium {
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-family: inherit;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  letter-spacing: 1px;
+}
+
+.glass-btn-premium.primary {
+  background: white;
+  color: black;
+  border: none;
+}
+
+.glass-btn-premium.primary:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255,255,255,0.2);
+}
+
+.glass-btn-premium.secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-btn-premium.secondary:hover {
+  background: rgba(231, 76, 60, 0.2);
+  border-color: #e74c3c;
+  color: #ff7675;
+}

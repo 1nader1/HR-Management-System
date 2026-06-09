@@ -1,0 +1,192 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;600&display=swap');
+
+:host {
+  --bg-image: url('../../assets/blurred-bg.jpg');
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.4);
+  --text-light: #ffffff;
+  --font-main: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.glass-page-wrapper {
+  height: calc(100vh - 120px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-main);
+  color: var(--text-light);
+  z-index: 1;
+}
+
+.glass-container {
+  display: flex;
+  width: 90%;
+  max-width: 1000px;
+  min-height: 560px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid var(--glass-border);
+  border-radius: 40px;
+  box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3);
+  overflow: hidden; 
+}
+
+.glass-left-panel {
+  flex: 1.2;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  border-inline-end: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.inner-image-wrapper {
+  flex: 1;
+  width: 100%;
+  min-height: 350px;
+  border-radius: 30px;
+  background-image: url('../../assets/blurred-bg.jpg'); 
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 30px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+}
+
+.text-content h1 {
+  font-weight: 300;
+  font-size: 2.2rem;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+  margin-top: 0;
+  text-transform: uppercase;
+}
+
+.text-content p {
+  font-weight: 200;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  line-height: 1.8;
+  opacity: 0.8;
+}
+
+.glass-right-panel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.glass-form {
+  width: 100%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 20px;
+}
+
+.form-title {
+  text-align: center;
+  font-weight: 400;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  font-size: 1.8rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 300;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  opacity: 0.9;
+  padding-inline-start: 10px;
+}
+
+/* حقول الإدخال */
+.glass-input {
+  width: 100%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--glass-border);
+  border-radius: 50px;
+  padding: 15px 20px;
+  font-size: 1rem;
+  color: white;
+  outline: none;
+  transition: all 0.3s ease;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.glass-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+  font-weight: 200;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+}
+
+/* زر الإرسال */
+.glass-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid #ffffff;
+  border-radius: 50px;
+  padding: 14px;
+  color: white;
+  font-size: 1rem;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 15px;
+}
+
+.glass-btn:hover {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+}
+
+/* رابط إنشاء حساب */
+.switch-link-glass {
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 300;
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+.glass-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-inline-start: 5px;
+  transition: 0.3s;
+}
+
+.glass-link:hover {
+  text-shadow: 0 0 10px rgba(255,255,255,0.8);
+}
+
+/* التجاوب مع الشاشات الصغيرة */
+@media (max-width: 900px) {
+  .glass-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .glass-left-panel { border-inline-end: none; border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding: 20px; }
+  .inner-image-wrapper { min-height: 200px; }
+  .glass-right-panel { padding: 30px 20px; }
+}

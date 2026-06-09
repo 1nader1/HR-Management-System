@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #121212;
+}
+
+body::before {
+  content: '';
+  position: fixed; 
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.386)), url('../src/assets/blurred-bg.jpg');  background-size: cover;
+  background-position: center;
+  filter: blur(15px); 
+  z-index: -1; 
+}
