@@ -6,7 +6,7 @@
 
   @if (!showForm) {
     <div class="glass-top-bar">
-      @if (userRole === 'Manager') {
+      @if (userRole === 'Manager' || userRole === 'Owner') {
         <button class="glass-btn-add" (click)="openAddForm()">
           <span class="plus-icon">+</span>
           <span class="btn-text">{{ 'EMPLOYEES.ADD_NEW_BTN' | translate }}</span>
@@ -14,11 +14,10 @@
       }
 
       <div class="rows-selector">
-        <select class="glass-select-small" [(ngModel)]="itemsPerPage">
+        <select class="glass-select-small" [ngModel]="itemsPerPage" (ngModelChange)="onItemsPerPageChange($event)">
           <option [value]="6">6</option>
           <option [value]="10">10</option>
           <option [value]="20">20</option>
-          <option [value]="1000">الكل</option>
         </select>
       </div>
     </div>
@@ -42,7 +41,7 @@
                 <small class="error-text">{{ 'EMPLOYEES.EMAIL_EXISTS_ERR' | translate }}</small>
               }
               @if (email.invalid && email.touched) {
-                <small class="error-text">يرجى إدخال بريد إلكتروني صحيح</small>
+                <small class="error-text">{{ 'EMPLOYEES.EMAIL_INVALID_ERR' | translate }}</small>
               }
             </div>
           </div>
@@ -94,36 +93,64 @@
             <th>{{ 'EMPLOYEES.TABLE_DEPARTMENT' | translate }}</th>
             <th>{{ 'EMPLOYEES.TABLE_POSITION' | translate }}</th>
             <th>{{ 'EMPLOYEES.TABLE_SALARY' | translate }}</th>
-            @if (userRole === 'Manager') {
+            @if (userRole === 'Manager' || userRole === 'Owner') {
               <th>{{ 'EMPLOYEES.TABLE_ACTIONS' | translate }}</th>
             }
           </tr>
         </thead>
         <tbody>
-          @for (emp of employees | slice:0:itemsPerPage; track emp.id) {
+          @for (emp of paginatedEmployees; track emp.id) {
             <tr>
               <td>{{ emp.name }}</td>
               <td>{{ emp.email }}</td>
               <td>{{ emp.department }}</td>
               <td>{{ emp.position }}</td>
               <td>{{ emp.salary | currency:'JD ' }}</td>
-              @if (userRole === 'Manager') {
+              @if (userRole === 'Manager' || userRole === 'Owner') {
                 <td>
                   <div class="action-buttons">
-                    <button class="glass-action-btn edit-btn" (click)="editEmployee(emp)">✏️</button>
-                    <button class="glass-action-btn delete-btn" (click)="deleteEmployee(emp.id)">🗑️</button>
+                    <button class="glass-action-btn edit-btn" (click)="editEmployee(emp)">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                        <path d="m15 5 4 4"></path>
+                      </svg>
+                    </button>
+                    <button class="glass-action-btn delete-btn" (click)="deleteEmployee(emp.id)">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                    </button>
                   </div>
                 </td>
               }
             </tr>
           } @empty {
             <tr>
-              <td [attr.colspan]="userRole === 'Manager' ? 6 : 5" class="empty-msg">{{ 'EMPLOYEES.EMPTY_MSG' | translate }}</td>
+              <td [attr.colspan]="userRole === 'Manager' || userRole === 'Owner' ? 6 : 5" class="empty-msg">{{ 'EMPLOYEES.EMPTY_MSG' | translate }}</td>
             </tr>
           }
         </tbody>
       </table>
     </div>
+    
+    @if (totalPages > 1) {
+      <div class="google-pagination">
+        <button class="page-nav-btn" [disabled]="currentPage === 1" (click)="changePage(currentPage - 1)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+          {{ 'EMPLOYEES.PREVIOUS' | translate }}
+        </button>
+    
+        <div class="page-numbers">
+          @for (page of pagesArray; track page) {
+            <button class="page-num-btn" [class.active]="page === currentPage" (click)="changePage(page)">
+              {{ page }}
+            </button>
+          }
+        </div>
+    
+        <button class="page-nav-btn" [disabled]="currentPage === totalPages" (click)="changePage(currentPage + 1)">
+          {{ 'EMPLOYEES.NEXT' | translate }}
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+      </div>
+    }
   </section>
-  
 </div>

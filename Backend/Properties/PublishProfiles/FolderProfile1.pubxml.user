@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Publish\HR_Backend</_PublishTargetUrl>
-    <History>True|2026-06-03T12:35:34.9393868Z||;True|2026-06-03T01:29:47.3340783+03:00||;True|2026-05-24T19:04:56.5838754+03:00||;True|2026-05-24T18:08:16.2442334+03:00||;</History>
+    <History>True|2026-06-13T14:47:27.7617341Z||;True|2026-06-11T01:37:38.4783893+03:00||;True|2026-06-11T01:37:26.1555815+03:00||;True|2026-06-03T15:35:34.9393868+03:00||;True|2026-06-03T01:29:47.3340783+03:00||;True|2026-05-24T19:04:56.5838754+03:00||;True|2026-05-24T18:08:16.2442334+03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

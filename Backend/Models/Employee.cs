@@ -9,5 +9,6 @@
         public decimal Salary { get; set; }
         public string Department { get; set; } = string.Empty;
         public string Role { get; set; } = "User";
+
     }
 }

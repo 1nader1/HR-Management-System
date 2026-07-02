@@ -20,9 +20,18 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 // Register the employee repository for dependency injection
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
+// Register the PDF service for dependency injection
+builder.Services.AddScoped<IPdfService, PdfService>();
+
+// Register the AI service for dependency injection
+builder.Services.AddHttpClient<IAiService, LocalAiService>();
+
 
 // Add services to the container.
-builder.Services.AddControllers();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<CheckUserActiveFilter>();
+});
 
 var jwtKey = builder.Configuration["Jwt:Key"];
 var keyBytes = Encoding.UTF8.GetBytes(jwtKey);

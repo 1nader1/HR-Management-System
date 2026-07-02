@@ -1,5 +1,6 @@
 ﻿using HRSYS.Data;
 using HRSYS.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -54,14 +55,19 @@ namespace HRSYS.Controllers
 
             if (user == null)
             {
-                return Unauthorized("البريد الإلكتروني او كلمة المرور غير صحيحة.");
+                return Unauthorized(new { message = "البريد الإلكتروني أو كلمة المرور غير صحيحة." });
             }
 
             bool isPasswordValid = BCrypt.Net.BCrypt.Verify(request.Password, user.Password);
 
             if (!isPasswordValid)
             {
-                return Unauthorized("البريد الإلكتروني أو كلمة المرور غير صحيحة.");
+                return Unauthorized(new { message = "البريد الإلكتروني أو كلمة المرور غير صحيحة." });
+            }
+
+            if (!user.IsActive)
+            {
+                return BadRequest(new { message = "عذراً، هذا الحساب مجمد حالياً. يرجى مراجعة إدارة النظام لتفعيله." });
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -73,7 +79,8 @@ namespace HRSYS.Controllers
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                     new Claim(ClaimTypes.Name, user.Name),
-                    new Claim(ClaimTypes.Role, user.Role ?? "User")
+                    new Claim(ClaimTypes.Email, user.Email),
+                    new Claim(ClaimTypes.Role, user.Role ?? "User"),
                 }),
                 Expires = DateTime.UtcNow.AddDays(1),
                 Issuer = "http://localhost",

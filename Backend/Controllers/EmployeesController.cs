@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HRSYS.Controllers
 {
-
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeesController : ControllerBase
@@ -18,7 +18,7 @@ namespace HRSYS.Controllers
         }
 
 
-        [Authorize(Roles = "Manager, User")]
+        [Authorize(Roles = "Manager,User,Owner")]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployees()
         {
@@ -26,7 +26,7 @@ namespace HRSYS.Controllers
             return Ok(employees);
         }
 
-        [Authorize(Roles = "Manager, User")]
+        [Authorize(Roles = "Manager,User,Owner")]
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
@@ -36,7 +36,7 @@ namespace HRSYS.Controllers
             return Ok(employee);
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager,Owner")]
         [HttpPost]
         public async Task<ActionResult<Employee>> AddEmployee(Employee employee)
         {
@@ -49,7 +49,7 @@ namespace HRSYS.Controllers
             return Ok(createdEmployee);
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager,Owner")]
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateEmployee(int id, Employee employee)
         {
@@ -66,7 +66,7 @@ namespace HRSYS.Controllers
             return Ok();
         }
 
-        [Authorize(Roles = "Manager")]
+        [Authorize(Roles = "Manager,Owner")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteEmployee(int id)
         {

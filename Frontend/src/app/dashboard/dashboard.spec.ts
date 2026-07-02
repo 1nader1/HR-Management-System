@@ -11,7 +11,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      // هنا نقوم باستيراد كل ما يحتاجه الكومبوننت ليعمل في بيئة الاختبار
+
       imports: [
         DashboardComponent, 
         TranslateModule.forRoot(), 

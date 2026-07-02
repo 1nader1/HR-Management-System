@@ -16,7 +16,7 @@
 
 .page-header h1 {
   text-align: center;
-  font-weight: 300;
+  font-weight: 500;
   letter-spacing: 3px;
   margin-bottom: 30px;
   text-transform: uppercase;
@@ -117,26 +117,28 @@
 
 .action-buttons {
   display: flex;
+  gap: 12px;
   justify-content: center;
-  gap: 10px;
 }
 
 .glass-action-btn {
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .glass-action-btn:hover { transform: scale(1.1); }
-.edit-btn:hover { background: rgba(241, 196, 15, 0.3); border-color: #f1c40f; }
-.delete-btn:hover { background: rgba(231, 76, 60, 0.3); border-color: #e74c3c; }
+.edit-btn:hover { background: rgba(229, 255, 0, 0.2); border-color: #ffee00bC; }
+.delete-btn:hover { background:rgba(255, 0, 0, 0.2); border-color: #ff0000bc; }
+.glass-action-btn svg { width: 16px; height: 16px; opacity: 0.8; }
 
 .glass-card {
   background: var(--glass-bg);
@@ -190,3 +192,82 @@
 
 .empty-msg { padding: 40px !important; opacity: 0.7; font-weight: 200; letter-spacing: 1px; }
 .error-text { color: #ff6b6b; font-size: 0.8rem; margin-top: 5px; display: block; }
+
+.google-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  background: rgba(30, 30, 30, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+}
+
+.page-nav-btn, .page-num-btn {
+  background: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.page-num-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.page-num-btn:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.page-num-btn.active {
+  background: #4a90e2; 
+  color: white;
+  box-shadow: 0 4px 15px rgba(74, 144, 226, 0.5);
+  transform: scale(1.05);
+}
+
+.page-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+
+.page-nav-btn:hover:not(:disabled) {
+  color: #4a90e2;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.page-nav-btn:disabled {
+  color: rgba(255, 255, 255, 0.2);
+  cursor: not-allowed;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 6px;
+}
+
+html[dir="rtl"] .page-nav-btn svg {
+  transform: scaleX(-1); 
+}

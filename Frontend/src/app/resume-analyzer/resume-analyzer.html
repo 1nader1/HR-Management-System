@@ -1,0 +1,69 @@
+<div class="cinematic-container">
+  
+  <div class="header-section text-center">
+    <h1 class="epic-title">{{ 'AI_ANALYZER.TITLE' | translate }}</h1>
+  </div>
+
+  <div class="upload-zone glass-panel" 
+       *ngIf="!isAnalyzing && !candidateResult"
+       (dragover)="onDragOver($event)" 
+       (drop)="onDrop($event)" 
+       (click)="fileInput.click()">
+    <div class="upload-content">
+      <div class="icon-glow">📄</div>
+      <h3>{{ 'AI_ANALYZER.DROP_ZONE' | translate }}</h3>
+      <p>{{ 'AI_ANALYZER.OR_CLICK' | translate }}</p>
+      <input type="file" #fileInput accept="application/pdf" (change)="onFileSelected($event)" hidden>
+    </div>
+  </div>
+
+  <p class="error-msg text-center" *ngIf="errorMessage">{{ errorMessage | translate }}</p>
+
+  <div class="ai-thinking-state" *ngIf="isAnalyzing">
+    <div class="ai-core-container">
+      <div class="core-node"></div>
+      <div class="pulse-ring ring-1"></div>
+      <div class="pulse-ring ring-2"></div>
+      <div class="pulse-ring ring-3"></div>
+    </div>
+    <h2 class="thinking-text">{{ 'AI_ANALYZER.THINKING' | translate }}</h2>
+  </div>
+
+  <div class="results-dashboard fade-in" *ngIf="candidateResult">
+    
+    <div class="action-bar">
+      <h2>{{ 'AI_ANALYZER.RESULT_TITLE' | translate }}</h2>
+      <button class="btn-glow" (click)="resetAnalyzer()">{{ 'AI_ANALYZER.NEW_ANALYSIS' | translate }}</button>
+    </div>
+
+    <div class="cards-grid">
+      <div class="glass-panel score-card text-center">
+        <div class="score-circle" [style.--score]="candidateResult.matchScore">
+          <span class="score-value">{{ candidateResult.matchScore }}<small>%</small></span>
+        </div>
+        <h3 class="score-label">{{ 'AI_ANALYZER.MATCH_SCORE' | translate }}</h3>
+      </div>
+
+      <div class="glass-panel info-card">
+        <div class="info-row">
+          <span class="label">{{ 'AI_ANALYZER.NAME' | translate }}</span>
+          <span class="value">{{ candidateResult.fullName }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">{{ 'AI_ANALYZER.EMAIL' | translate }}</span>
+          <span class="value">{{ candidateResult.email }}</span>
+        </div>
+        <div class="info-row">
+          <span class="label">{{ 'AI_ANALYZER.POSITION' | translate }}</span>
+          <span class="value">{{ candidateResult.appliedPosition }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass-panel feedback-card mt-4">
+      <h3 class="feedback-title">{{ 'AI_ANALYZER.RECOMMENDATION' | translate }}</h3>
+      <p class="feedback-text">{{ candidateResult.aiFeedback }}</p>
+    </div>
+
+  </div>
+</div>

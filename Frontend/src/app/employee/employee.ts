@@ -6,7 +6,7 @@ import { Employee as EmployeeModel } from '../models/employee.model';
 import { TranslateModule } from '@ngx-translate/core';
 import { NotificationService } from '../services/notification'; 
 import { TranslateService } from '@ngx-translate/core';
-import{AuthService} from '../services/auth';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-employee',
@@ -24,6 +24,8 @@ export class Employee implements OnInit {
   isEditing: boolean = false; 
   showForm: boolean = false;
   emailError = false;
+  
+  currentPage: number = 1;
   itemsPerPage: number = 6;
 
   departments = ['IT', 'HR', 'Marketing', 'Sales', 'Finance'];
@@ -49,6 +51,45 @@ export class Employee implements OnInit {
   ngOnInit() { 
     this.loadEmployees(); 
     this.userRole = this.authService.getRole();
+  }
+
+  get paginatedEmployees() {
+    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
+    return this.employees.slice(startIndex, startIndex + this.itemsPerPage);
+  }
+
+  get totalPages() {
+    return Math.ceil(this.employees.length / this.itemsPerPage);
+  }
+
+  get pagesArray() {
+    const total = this.totalPages;
+    const current = this.currentPage;
+    const maxPagesToShow = 5; 
+    
+    let start = Math.max(1, current - Math.floor(maxPagesToShow / 2));
+    let end = Math.min(total, start + maxPagesToShow - 1);
+
+    if (end - start + 1 < maxPagesToShow) {
+      start = Math.max(1, end - maxPagesToShow + 1);
+    }
+
+    const pages = [];
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }
+
+  changePage(page: number) {
+    if (page >= 1 && page <= this.totalPages) {
+      this.currentPage = page;
+    }
+  }
+
+  onItemsPerPageChange(value: number) {
+    this.itemsPerPage = value;
+    this.currentPage = 1;
   }
 
   onDepartmentChange() {
@@ -95,8 +136,9 @@ export class Employee implements OnInit {
 
     if (this.isEditing) {
       this.employeeService.updateEmployee(this.currentEmployee).subscribe(() => {
-      this.notify.showSuccess(this.translate.instant('NOTIFICATIONS.EMP_UPD_SUCCESS'), this.translate.instant('NOTIFICATIONS.SUCCESS_TITLE'));        this.loadEmployees(); 
-        this.resetForm();     
+        this.notify.showSuccess(this.translate.instant('NOTIFICATIONS.EMP_UPD_SUCCESS'), this.translate.instant('NOTIFICATIONS.SUCCESS_TITLE'));        
+        this.loadEmployees(); 
+        this.resetForm();    
       });
     } else {
       this.employeeService.addEmployee(this.currentEmployee).subscribe(() => {
@@ -115,16 +157,15 @@ export class Employee implements OnInit {
   }
 
   deleteEmployee(id: number) {
-    if(confirm('هل أنت متأكد أنك تريد حذف هذا الموظف؟')) {
+    if(confirm(this.translate.instant('EMPLOYEES.DELETE_CONFIRM'))) {
       this.employeeService.deleteEmployee(id).subscribe({
         next: () => {
-
           this.notify.showSuccess(this.translate.instant('NOTIFICATIONS.EMP_DEL_SUCCESS'), this.translate.instant('NOTIFICATIONS.SUCCESS_TITLE'));
           this.loadEmployees();
         },
         error: (err) => {
           console.error('Error deleting:', err);
-          this.notify.showError('حدث خطأ أثناء الحذف');
+          this.notify.showError(this.translate.instant('NOTIFICATIONS.EMP_DEL_ERR'), this.translate.instant('NOTIFICATIONS.ERROR_TITLE'));
         }
       });
     }

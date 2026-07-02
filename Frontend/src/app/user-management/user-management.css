@@ -1,0 +1,180 @@
+.cinematic-container {
+  padding: 40px 20px;
+  color: #fff;
+  font-family: 'Outfit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  direction: rtl;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.fade-in { animation: fadeIn 0.4s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+.epic-title {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #fff;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.table-tools {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 20px;
+}
+
+.count-badge {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 20px;
+  border-radius: 20px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(25px);
+  -webkit-backdrop-filter: blur(25px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 25px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.glass-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+.glass-table th {
+  color: #fff;
+  padding: 20px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.glass-table td {
+  padding: 18px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  vertical-align: middle;
+  color: #e2e8f0;
+  font-size: 0.95rem;
+}
+
+.table-row { transition: all 0.25s ease; }
+.table-row:hover { background: rgba(255, 255, 255, 0.05); }
+.table-row:last-child td { border-bottom: none; }
+
+.font-bold { font-weight: bold; color: #fff; }
+.email-badge { background: rgba(255, 255, 255, 0.05); padding: 4px 10px; border-radius: 6px; color: #cbd5e1; }
+
+.role-badge { padding: 4px 12px; border-radius: 12px; font-weight: 500; font-size: 0.85rem; display: inline-block; }
+.role-manager { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+.role-user { background: rgba(255, 255, 255, 0.1); color: #cbd5e1; }
+
+.glass-select {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #fff;
+  padding: 6px 15px;
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.glass-select:focus {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.glass-select option {
+  background: #1e293b; 
+  color: #fff;
+}
+
+.pulse-ring { width: 40px; height: 40px; border-radius: 50%; border: 3px solid transparent; border-top-color: #fff; animation: spin 1s linear infinite; margin: 0 auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.text-glow { color: #fff; opacity: 0.8; }
+.error-msg { color: #f87171; font-weight: bold; padding: 20px; }
+
+.cinematic-container { padding: 40px 20px; color: #fff; font-family: 'Outfit', sans-serif; direction: rtl; max-width: 1200px; margin: 0 auto; }
+.fade-in { animation: fadeIn 0.3s ease-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+.epic-title { font-size: 2rem; font-weight: 500; color: #fff; margin-bottom: 40px; text-align: center; }
+.table-tools { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; gap: 20px; }
+.count-badge { background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 20px; border-radius: 20px; font-size: 0.9rem; }
+
+/* بار الإجراءات الجماعية العائم */
+.bulk-actions-bar { display: flex; align-items: center; gap: 12px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2); padding: 6px 16px; border-radius: 20px; }
+.bulk-count { font-size: 0.9rem; color: #34d399; font-weight: bold; margin-left: 8px; }
+.btn-bulk { border: none; padding: 4px 14px; border-radius: 12px; font-size: 0.85rem; cursor: pointer; font-weight: 500; transition: all 0.2s; color: #fff; }
+.btn-bulk-activate { background: rgba(52, 211, 153, 0.2); border: 1px solid rgba(52, 211, 153, 0.4); }
+.btn-bulk-freeze { background: rgba(245, 158, 11, 0.2); border: 1px solid rgba(245, 158, 11, 0.4); }
+.btn-bulk-delete { background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); }
+.btn-bulk:hover { transform: translateY(-1px); background: rgba(255, 255, 255, 0.2); }
+
+/* تصميم الجدول زجاج مطفي */
+.glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 25px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); overflow: hidden; }
+.glass-table { width: 100%; border-collapse: collapse; text-align: center; }
+.glass-table th { color: #fff; padding: 20px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.15); font-weight: 500; font-size: 0.95rem; }
+.glass-table td { padding: 18px 15px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: middle; color: #e2e8f0; font-size: 0.95rem; }
+.table-row { transition: all 0.25s ease; }
+.table-row:hover { background: rgba(255, 255, 255, 0.04); }
+.row-frozen { opacity: 0.55; background: rgba(0, 0, 0, 0.15); } /* ستايل باهت للحساب المجمد */
+
+.font-bold { font-weight: bold; color: #fff; }
+.email-badge { background: rgba(255, 255, 255, 0.05); padding: 4px 10px; border-radius: 6px; color: #cbd5e1; }
+
+.glass-select { background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); color: #fff; padding: 6px 15px; border-radius: 10px; outline: none; cursor: pointer; }
+.glass-select option { background: #1e293b; color: #fff; }
+
+.glass-checkbox { width: 18px; height: 18px; accent-color: #34d399; cursor: pointer; background: transparent; border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 4px; }
+
+.switch { position: relative; display: inline-block; width: 44px; height: 22px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); transition: .3s; }
+.slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 4px; bottom: 3px; background-color: #cbd5e1; transition: .3s; }
+input:checked + .slider { background-color: rgba(52, 211, 153, 0.2); border-color: #34d399; }
+input:checked + .slider:before { transform: translateX(20px); background-color: #34d399; box-shadow: 0 0 8px rgba(52, 211, 153, 0.6); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* أزرار الإجراءات */
+.actions-cell { display: flex; gap: 10px; justify-content: center; }
+.btn-action { width: 36px; height: 36px; border-radius: 50%; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); color: #f87171; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; }
+.btn-action:hover { background: rgba(239, 68, 68, 0.15); transform: scale(1.05); }
+.btn-action svg { width: 16px; height: 16px; }
+
+.pulse-ring { width: 40px; height: 40px; border-radius: 50%; border: 3px solid transparent; border-top-color: #fff; animation: spin 1s linear infinite; margin: 0 auto; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.text-glow { color: #fff; opacity: 0.8; }
+.error-msg { color: #f87171; font-weight: bold; padding: 20px; }
+
+.owner-static-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15), rgba(255, 215, 0, 0.05));
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  padding: 6px 14px;
+  border-radius: 20px;
+  color: #ffd700;
+  font-weight: 600;
+  font-size: 0.9rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.1);
+  user-select: none;
+}
+
+.crown-icon {
+  font-size: 1.1rem;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.4));
+}
